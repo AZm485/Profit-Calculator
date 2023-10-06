@@ -1,0 +1,124 @@
+# Updated 10/2023
+# This is a program to find the net profit for MallowSquishDesigns.
+import math
+"""All costs are by per item/piece.
+two pieces of stabilizer are used for tshirts and sweatshirts.
+each sheet of laminate paper does one and a half tags. """
+
+def clothing_cost():
+    cost = (stabilizer_cost * 2) + backing_cost + adhesive_cost + thread_cost
+    return cost
+
+def check(x):
+    a = False
+    while a != True:
+        try:
+            x = float(x)
+            a = True
+        except:
+            x = input('That is a not a number, please try again.')
+            a = False
+    return x
+
+def check_int(x):
+    a = False
+    while a != True:
+        try:
+            x = int(x)
+            a = True
+        except:
+            x = input('This is not a whole number, please enter a whole number.')
+            a = False
+    return x
+
+def tag():
+    x = (math.ceil((num_tags / 1.5)) * laminate_paper_cost)
+    x += (num_tags * cardstock_cost)
+    print('Your total tag cost is:', end=' $')
+    print('%.2f' % x)
+    return x
+
+def tshirt():
+    x = (tshirt_cost + clothing_cost()) * num_tshirts
+    print('Your total tshirt cost is:', end=' $')
+    print('%.2f' % x)
+    return x
+
+def sweatshirt():
+    x = sweatshirt_cost + clothing_cost() - stabilizer_cost
+    x = x * num_sweatshirt
+    print('Your total sweatshirt cost is:', end=' $')
+    print('%.2f' % x)
+    return x
+
+def beanie():
+    x = beanies_cost + clothing_cost() - stabilizer_cost
+    x = x * num_beanies
+    print('Your total beanie cost is:', end=' $')
+    print('%.2f' % x)
+    return x
+
+def charm():
+    x = (croc_bags + croc_charms_cost) * num_charms
+    print('Your total charm cost is:', end=' $')
+    print('%.2f' % x)
+    return x
+
+def packaging():
+    x = num_small_orders * small_packaging_cost
+    x += (num_big_orders * big_packaging_cost)
+    x += (num_orders * thank_you_cards) + shipping_cost
+    x += (num_envelopes * envelope_cost)
+    print('Your total packaging cost is:', end=' $')
+    print('%.2f' % x)
+    return x
+
+def total():
+    x = charm() + beanie() + sweatshirt() + tshirt() + tag() + packaging()
+    print('Your total cost is:', end=' $')
+    print('%.2f' % x)
+    return x
+
+def net():
+    x = gross_sales - total()
+    print('Your revenue is:', end=' $')
+    print('%.2f' % x)
+
+def main():
+    net()
+
+tshirt_cost = 5.00
+sweatshirt_cost = 15.00
+beanies_cost = 5.00
+croc_charms_cost = 0.12
+adhesive_cost = 0.45
+thread_cost = 0.20
+backing_cost = 0.30
+stabilizer_cost = 0.14
+small_packaging_cost = 0.20
+big_packaging_cost = 0.30
+envelope_cost = 0.16
+croc_bags = 0.07
+label_paper_cost = 0.10
+laminate_paper_cost = 0.40
+cardstock_cost = 0.10
+thank_you_cards = 0.06
+str1 = 'How many '
+str2 = 'did you sell?'
+str3 = 'do you have?'
+str4 = 'How much '
+
+shipping_cost = check(input(str4+'is shipping?'))
+num_charms = check_int(input(str1+'croc charms '+str2))
+num_tshirts = check_int(input(str1+'t shirts '+str2))
+num_sweatshirt = check_int(input(str1+'sweatshirts '+str2))
+num_tags = check_int(input(str1+'tags '+str2))
+num_beanies = check_int(input(str1+'beanies '+str2))
+num_orders = check_int(input(str1+'orders '+str3))
+num_envelopes = check_int(input(str1+'envelopes will you use?'))
+num_big_orders = check_int(input(str1+'big bag orders '+str3))
+num_small_orders = check_int(input(str1+'small bag orders '+str3))
+gross_sales = check(input(str4+'did you make in gross sales?'))
+
+if __name__ == "__main__":
+    main()
